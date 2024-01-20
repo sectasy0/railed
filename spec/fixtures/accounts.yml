@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id                     :uuid             not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  locale                 :string           default("en")
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  role                   :integer          default("user")
+#  name                   :string
+#  uid                    :string
+#  provider               :string
+#  avatar                 :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+first:
+  id: 13c23a6a-71ad-6810-3afd-2256db1f470b
+  name: John
+  email: john@testemail.com
+  encrypted_password: <%= Devise::Encryptor.digest(Account, 'secret_password') %>
+first_with_reset_token:
+  id: 13c23a6a-d4e3-6750-3afe-2256db1f470b
+  name: John
+  email: john23@testemail.com
+  encrypted_password: <%= Devise::Encryptor.digest(Account, 'secret_password') %>
+  reset_password_token: <%= Devise.token_generator.generate(Account, :reset_password_token) %>
+  reset_password_sent_at: <%= Time.now.utc %>

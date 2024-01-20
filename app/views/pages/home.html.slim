@@ -1,0 +1,167 @@
+- set_meta_tags(title: 'Home')
+
+/ .bg-gray-100.py-5.px-6.rounded-md
+/   = page_title('Railed')
+/   p.my-2
+/     |  A starter rails template setup with some defaults and a few features to get you going.
+/   ul.list-disc.list-inside
+/     li
+/       | Tailwind CSS, header, form styles
+/     li
+/       | User authentication
+/     li
+/       | RSpec
+
+.flex.items-center.flex-wrap
+  .flex-grow
+    h1.font-semibold.text-lg.text-gray-900
+      span.break-all
+        |  Jakiś tam długi tytuł strony chuj wi
+  .flex.justify-end.flex-auto
+    .mb-4.mt-4
+      = link_to(icon('fa-solid', 'chevron-left', class: 'mr-1') + t('multipurpose.back'), root_path, class: "#{button_classes.render(style: :secondary)} text-xs")
+      | &nbsp;
+      = link_to(icon('fa-solid', 'plus', class: 'mr-1') + 'Add account', root_path, class: "#{button_classes.render(style: :success)} text-xs")
+
+div.overflow-auto.shadow.rounded-md
+  table.w-full.border-collapse.border.border-gray-200.bg-white.text-left.text-sm.text-gray-500
+    thead.bg-gray-100
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Name
+        th.px-6.py-4.font-medium.text-gray-900
+          | Date
+        th.px-6.py-4.font-medium.text-gray-900
+          | Email
+        th.px-6.py-4.font-medium.text-gray-900
+          | State
+        th.px-6.py-4.font-medium.text-gray-900
+
+    tbody.divide-y.divide-gray-100.border-t.border-gray-100
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Helen Howard
+        td.px-6.py-4
+          | Nov.4 2022
+        td.px-6.py-4
+          | helen@sailboatui.com
+
+        td.px-6.py-4
+          span.inline-flex.items-center.gap-1.rounded-full.bg-green-50.px-2.py-1.text-xs.font-semibold.text-green-600
+            svg.h-3.w-3[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"]
+              path[fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"]
+            |  Paid
+
+        td.flex.justify-end.gap-4.px-6.py-4.font-medium
+          a[href=""]
+            | Delete
+          a.text-primary-700[href=""]
+            | Edit
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Helen Howard
+        td.px-6.py-4
+          | Nov.4 2022
+        td.px-6.py-4
+          | helen@sailboatui.com
+        td.px-6.py-4
+          span.inline-flex.items-center.gap-1.rounded-full.bg-green-50.px-2.py-1.text-xs.font-semibold.text-green-600
+            svg.h-3.w-3[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"]
+              path[fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"]
+            |  Paid
+        td.flex.justify-end.gap-4.px-6.py-4.font-medium
+          .relative.ml-3[data-controller='toggle' data-toggle-click-outside='add']
+            div
+              button#user-menu-button.text-gray-700.flex.max-w-xs.items-center.text-sm.focus:outline-none.focus:ring-2.focus:ring-offset-2[data-action='toggle#toggle' type='button' aria-expanded='false' aria-haspopup='true']
+                svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor"]
+                  path[stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"]
+
+            .hidden.origin-top-right.absolute.top-full.right-0.mt-2.w-20.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-100.z-30[data-toggle-target='toggleable' data-css-class='hidden' role='menu' aria-orientation='vertical' aria-labelledby='user-menu-button' tabindex='-1']
+              .py-1[role="menu" aria-orientation="vertical" aria-labelledby="options-menu"]
+                = link_to('Edit', nil, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100', role: 'menuitem', tabindex: '-1')
+                = link_to('Delete', nil, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100', role: 'menuitem', tabindex: '-1')
+
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Helen Howard
+        td.px-6.py-4
+          | Nov.4 2022
+        td.px-6.py-4
+          | helen@sailboatui.com
+        td.px-6.py-4
+          span.inline-flex.items-center.gap-1.rounded-full.bg-red-50.px-2.py-1.text-xs.font-semibold.text-red-600
+            svg.h-3.w-3[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"]
+              path[d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"]
+            |  Canceled
+        td.flex.justify-end.gap-4.px-6.py-4.font-medium
+          a[href=""]
+            | Delete
+          a.text-primary-700[href=""]
+            | Edit
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Helen Howard
+        td.px-6.py-4
+          | Nov.4 2022
+        td.px-6.py-4
+          | helen@sailboatui.com
+        td.px-6.py-4
+          span.inline-flex.items-center.gap-1.rounded-full.bg-green-50.px-2.py-1.text-xs.font-semibold.text-green-600
+            svg.h-3.w-3[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"]
+              path[fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"]
+            |  Paid
+        td.flex.justify-end.gap-4.px-6.py-4.font-medium
+          a[href=""]
+            | Delete
+          a.text-primary-700[href=""]
+            | Edit
+      tr
+        th.px-6.py-4.font-medium.text-gray-900
+          | Helen Howard
+        td.px-6.py-4
+          | Nov.4 2022
+        td.px-6.py-4
+          | helen@sailboatui.com
+        td.px-6.py-4
+          span.inline-flex.items-center.gap-1.rounded-full.bg-green-50.px-2.py-1.text-xs.font-semibold.text-green-600
+            svg.h-3.w-3[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor"]
+              path[fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"]
+            |  Paid
+        td.flex.justify-end.gap-4.px-6.py-4.font-medium
+          a[href=""]
+            | Delete
+          a.text-primary-700[href=""]
+            | Edit
+
+.flex.mt-4.justify-center.md:justify-start
+  nav[aria-label="Pagination"]
+    ul.inline-flex.items-center.-space-x-px.rounded-md.text-sm.shadow-sm
+      li
+        a.inline-flex.items-center.rounded-l-md.border.border-gray-300.bg-white.px-2.py-2.font-medium.text-gray-500.hover:bg-gray-50[href="#"]
+          span.sr-only
+            | Previous
+          svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+            path[fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"]
+      li
+        a.z-10.inline-flex.items-center.border.border-gray-300.bg-gray-100.px-4.py-2.font-medium.text-gray-700[href="#" aria-current="page"]
+          | 1
+      li
+        a.inline-flex.items-center.border.border-gray-300.bg-white.px-4.py-2.text-gray-500.hover:bg-gray-50[href="#"]
+          | 2
+      li
+        span.inline-flex.items-center.border.border-gray-300.bg-white.px-4.py-2.text-gray-700
+          | ...
+      li
+        a.inline-flex.items-center.border.border-gray-300.bg-white.px-4.py-2.text-gray-500.hover:bg-gray-50[href="#"]
+          | 9
+      li
+        a.inline-flex.items-center.border.border-gray-300.bg-white.px-4.py-2.text-gray-500.hover:bg-gray-50[href="#"]
+          | 10
+      li
+        a.inline-flex.items-center.rounded-r-md.border.border-gray-300.bg-white.px-2.py-2.font-medium.text-gray-500.hover:bg-gray-50[href="#"]
+          span.sr-only
+            | Next
+          svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+            path[fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"]
+
+br

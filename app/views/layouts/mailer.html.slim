@@ -1,0 +1,19 @@
+doctype html
+html[lang="en"]
+  head
+    meta[charset="UTF-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    = stylesheet_link_tag 'mail'
+  body.bg-gray-100
+    - app_mail = Rails.application.config_for(:config)[:app_mail]
+    .bg-white.p-4.shadow-lg.px-4 = yield
+
+    .flex.items-center.justify-between.px-4.py-4.bg-gray-600
+      = image_tag 'rapid-ruby-stamp-dark.svg', alt: 'railed', class: 'h-10 w-auto'
+      .text-right
+        p.text-gray-400
+          = t('mailers.footer')
+          | &nbsp;
+          a.text-blue-500.hover:underline[href="mailto:#{app_mail}"] = app_mail
+        p.text-gray-500
+          | © 2023 Your Company. All rights reserved.

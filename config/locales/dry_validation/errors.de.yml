@@ -1,0 +1,69 @@
+de:
+  dry_validation:
+    or: 'oder'
+    errors:
+      account:
+        claim:
+          invalid: 'muss eine Instanz von Account sein'
+        unexpected_key: 'ist nicht erlaubt'
+        array: 'muss ein Array sein'
+        empty?: 'muss leer sein'
+        excludes?: 'darf %{value} nicht enthalten'
+        excluded_from?:
+          arg:
+            default: 'darf nicht einer der folgenden Werte sein: %{list}'
+            range: 'darf nicht einer der Werte zwischen %{list_left} und %{list_right} sein'
+        exclusion?: 'darf nicht einer der folgenden Werte sein: %{list}'
+        eql?: 'muss %{left} entsprechen'
+        not_eql?: 'darf nicht %{left} entsprechen'
+        filled?: 'muss ausgefüllt sein'
+        format?: 'hat ein ungültiges Format'
+        number?: 'muss eine Zahl sein'
+        odd?: 'muss ungerade sein'
+        even?: 'muss gerade sein'
+        gt?: 'muss größer als %{num} sein'
+        gteq?: 'muss größer oder gleich %{num} sein'
+        hash?: 'muss ein Hash sein'
+        included_in?:
+          arg:
+            default: 'muss einer der folgenden Werte sein: %{list}'
+            range: 'muss einer der Werte zwischen %{list_left} und %{list_right} sein'
+        inclusion: 'muss einer der folgenden Werte sein: %{list}'
+        includes?: 'muss %{value} enthalten'
+        bool?: 'muss ein boolescher Wert sein'
+        true?: 'muss wahr sein'
+        false?: 'muss falsch sein'
+        int?: 'muss eine ganze Zahl sein'
+        float?: 'muss eine Gleitkommazahl sein'
+        decimal?: 'muss eine Dezimalzahl sein'
+        date?: 'muss ein Datum sein'
+        date_time?: 'muss ein Datum und eine Uhrzeit sein'
+        time?: 'muss eine Uhrzeit sein'
+        key?: 'fehlt'
+        attr?: 'fehlt'
+        lt?: 'muss kleiner als %{num} sein'
+        lteq?: 'muss kleiner oder gleich %{num} sein'
+        max_size?: 'Größe darf nicht größer als %{num} sein'
+        max_bytesize?: 'Bytegröße darf nicht größer als %{num} sein'
+        min_size?: 'Größe darf nicht kleiner als %{num} sein'
+        min_bytesize?: 'Bytegröße darf nicht kleiner als %{num} sein'
+        nil?: 'darf nicht definiert sein'
+        str?: 'muss ein String sein'
+        type?: 'muss vom Typ %{type} sein'
+        respond_to?: 'muss die Methode %{method} unterstützen'
+        size?:
+          arg:
+            default: 'Größe muss %{size} sein'
+            range: 'Größe muss zwischen %{size_left} und %{size_right} liegen'
+          value:
+            string:
+              arg:
+                default: 'Länge muss %{size} sein'
+                range: 'Länge muss zwischen %{size_left} und %{size_right} liegen'
+        bytesize?:
+          arg:
+            default: 'Länge muss %{size} Bytes betragen'
+            range: 'muss eine Länge von %{size_left} bis %{size_right} Bytes haben'
+        uuid_v4?: "keine gültige UUID ist"
+        not:
+          empty?: "kann nicht leer sein"

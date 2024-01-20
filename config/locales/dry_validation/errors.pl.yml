@@ -1,0 +1,69 @@
+pl:
+  dry_validation:
+    or: "lub"
+    errors:
+      rules:
+        claim:
+          invalid: 'musi być Account'
+      unexpected_key: "nie jest dozwolony"
+      array?: "musi być tablicą"
+      empty?: "musi być pusta"
+      excludes?: "nie może zawierać %{value}"
+      excluded_from?:
+        arg:
+          default: "nie może być jednym z: %{list}"
+          range: "nie może być jednym z: %{list_left} - %{list_right}"
+      exclusion?: "nie może być jednym z: %{list}"
+      eql?: "musi być równy %{left}"
+      not_eql?: "nie może być równe %{left}"
+      filled?: "musi być wypełnione"
+      format?: "jest w nieprawidłowym formacie"
+      number?: "musi być liczbą"
+      odd?: "musi być nieparzysta"
+      even?: "musi być parzysta"
+      gt?: "musi być większa niż %{num}"
+      gteq?: "musi być większa lub równa %{num}"
+      hash?: "musi być hashem"
+      included_in?:
+        arg:
+          default: "musi być jednym z: %{list}"
+          range: "musi być jednym z: %{list_left} - %{list_right}"
+      inclusion?: "musi być jednym z: %{list}"
+      includes?: "musi zawierać %{value}"
+      bool?: "musi być boolean"
+      true?: "musi być prawdziwe"
+      false?: "musi być false"
+      int?: "musi być liczbą całkowitą"
+      float?: "musi być zmiennoprzecinkowa"
+      decimal?: "musi być liczbą dziesiętną"
+      date?: "musi być datą"
+      date_time?: "musi być date_time"
+      time?: "musi być time"
+      key?: "brakuje"
+      attr?: "brakuje"
+      lt?: "musi być mniejszy niż %{num}"
+      lteq?: "musi być mniejsza lub równa %{num}"
+      max_size?: "rozmiar nie może być większy niż %{num}"
+      max_bytesize?: "rozmiar bajtu nie może być większy niż %{num}"
+      min_size?: "rozmiar nie może być mniejszy niż %{num}"
+      min_bytesize?: "rozmiar bajtu nie może być mniejszy niż %{num}"
+      nil?: "nie można zdefiniować"
+      str?: "musi być ciągiem znaków"
+      type?: "musi być %{type}"
+      respond_to?: "musi odpowiadać na %{metoda}"
+      size?:
+        arg:
+          default: "musi mieć długość %{size}"
+          range: "długość musi być w przedziale %{size_left} - %{size_right}"
+        value:
+          string:
+            arg:
+              default: "musi mieć długość %{size}"
+              range: "długość musi być w przedziale %{size_left} - %{size_right}"
+      bytesize?:
+        arg:
+          default: "musi mieć długość %{size} bajtów"
+          range: "musi mieć długość %{size_left} - %{size_right} bajtów"
+      uuid_v4?: "nie jest prawidłowym identyfikatorem UUID"
+      not:
+        empty?: "nie może być pusty"

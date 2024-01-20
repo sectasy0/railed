@@ -1,0 +1,82 @@
+section.bg-gray-900
+  .py-8.px-4.mx-auto.max-w-screen-xl.text-center.lg:py-16.lg:px-12
+    a.inline-flex.justify-between.items-center.py-1.px-1.pr-4.mb-7.text-sm.rounded-full
+
+    h1.mb-4.text-4xl.font-extrabold.tracking-tight.leading-none.md:text-5xl.lg:text-6xl.text-white
+      = t('views.landing.hero.title')
+    p.mb-8.text-lg.font-normal.text-gray-500.lg:text-xl.sm:px-16.xl:px-48.dark:text-gray-400
+      = t('views.landing.hero.desc')
+    .flex.flex-col.mb-8.lg:mb-16.space-y-4.sm:flex-row.sm:justify-center.sm:space-y-0.sm:space-x-4
+      a.inline-flex.justify-center.items-center.py-3.px-5.text-base.font-medium.text-center.text-white.rounded-lg.bg-rose-500.focus:ring-4.focus:ring-rose-400.hover:bg-opacity-75[href="github.com/sectasy0/railed"]
+        = t('views.landing.hero.button1')
+        svg.ml-2.-mr-1.w-5.h-5[fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"]
+          path[fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"]
+
+
+section.bg-white.dark:bg-gray-900
+  .py-8.px-4.mx-auto.max-w-screen-xl.sm:py-16.lg:px-6
+    .max-w-screen-md.mb-8.lg:mb-16
+      h2.mb-4.text-4xl.tracking-tight.font-extrabold.text-gray-900.dark:text-white
+        = t('views.landing.features.title')
+      p.text-gray-500.sm:text-xl.dark:text-gray-400
+        = t('views.landing.features.desc')
+    .space-y-8.md:grid.md:grid-cols-2.lg:grid-cols-3.md:gap-12.md:space-y-0
+
+      div
+        .flex.justify-center.items-center.mb-4.w-10.h-10.rounded-full.bg-rose-100.lg:h-12.lg:w-12
+          svg.w-5.h-5.text-rose-600.lg:w-6.lg:h-6[fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"]
+            path[d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"]
+        h3.mb-2.text-xl.font-bold.dark:text-white = t('views.landing.features.first.title')
+        p.text-gray-500.dark:text-gray-400 = t('views.landing.features.first.desc')
+
+      div
+        .flex.justify-center.items-center.mb-4.w-10.h-10.rounded-full.bg-rose-100.lg:h-12.lg:w-12
+          span.text-rose-600
+            = icon('fa-solid', 'shield-halved')
+        h3.mb-2.text-xl.font-bold.dark:text-white = t('views.landing.features.second.title')
+        p.text-gray-500.dark:text-gray-400 = t('views.landing.features.second.desc')
+
+      div
+        .flex.justify-center.items-center.mb-4.w-10.h-10.rounded-full.bg-rose-100.lg:h-12.lg:w-12
+          span.text-rose-600
+            = icon('fa-solid', 'users')
+        h3.mb-2.text-xl.font-bold.dark:text-white = t('views.landing.features.third.title')
+        p.text-gray-500.dark:text-gray-400 = t('views.landing.features.third.desc')
+
+section.bg-white.dark:bg-gray-900
+  .py-8.px-4.mx-auto.max-w-screen-xl.sm:py-16.lg:px-6
+    .max-w-screen-md.mb-8.lg:mb-16
+      h2.mb-4.text-4xl.tracking-tight.font-extrabold.text-gray-900.dark:text-white
+        = t('views.landing.faq.title')
+    .space-y-8.md:gap-12.md:space-y-0
+      #accordion-flush[data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400"]
+        h2#accordion-flush-heading-1
+          button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400[type="button" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1"]
+            span = t('views.landing.faq.first.q')
+            svg.w-3.h-3.rotate-180.shrink-0[data-accordion-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6"]
+              path[stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"]
+        #accordion-flush-body-1.hidden[aria-labelledby="accordion-flush-heading-1"]
+          .py-5.border-b.border-gray-200.dark:border-gray-700
+            p.mb-2.text-gray-500.dark:text-gray-400 = t('views.landing.faq.first.a')
+
+        h2#accordion-flush-heading-2
+          button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400[type="button" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2"]
+            span = t('views.landing.faq.second.q')
+            svg.w-3.h-3.rotate-180.shrink-0[data-accordion-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6"]
+              path[stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"]
+
+        #accordion-flush-body-2.hidden[aria-labelledby="accordion-flush-heading-2"]
+          .py-5.border-b.border-gray-200.dark:border-gray-700
+            - link = link_to('stripe', 'https://stripe.com/en-pl', class: 'text-blue-600 hover:underline', target: :_blank)
+            p.mb-2.text-gray-500.dark:text-gray-400
+              = t('views.landing.faq.second.a', link: ).html_safe
+
+        h2#accordion-flush-heading-3
+          button.flex.items-center.justify-between.w-full.py-5.font-medium.text-left.text-gray-500.border-b.border-gray-200.dark:border-gray-700.dark:text-gray-400[type="button" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3"]
+            span = t('views.landing.faq.third.q')
+            svg.w-3.h-3.rotate-180.shrink-0[data-accordion-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6"]
+              path[stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"]
+
+        #accordion-flush-body-3.hidden[aria-labelledby="accordion-flush-heading-3"]
+          .py-5.border-b.border-gray-200.dark:border-gray-700
+            p.mb-2.text-gray-500.dark:text-gray-400 = t('views.landing.faq.third.a')

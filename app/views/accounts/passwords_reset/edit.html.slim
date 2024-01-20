@@ -1,0 +1,26 @@
+- title('Change your password')
+
+.max-w-md.mx-auto
+
+  .mb-8 = tag.h1('Change your password', class: page_title_classes.render)
+
+  = form_with(url: accounts_passwords_reset_update_path, method: :patch, scope: :account) do |form|
+    = render('shared/form_errors', resource: @account)
+
+    .mb-4
+      = form.hidden_field :reset_password_token, class: input_classes.render
+
+    .mb-4
+      = form.label :password, 'New password', class: label_classes.render
+      .mt-1
+        = form.password_field :password, required: true, autocomplete: 'new-password', class: input_classes.render
+      = tag.span '8 characters minimum.', class: hint_classes.render
+
+    .mb-4
+      = form.label :password_confirmation, 'Confirm new password', class: label_classes.render
+      .mt-1
+        = form.password_field :password_confirmation, required: true, autocomplete: 'new-password', class: input_classes.render
+
+    .clearfix
+      = link_to(icon('fa-solid', 'chevron-left', class: 'mr-1') + t('multipurpose.back'), root_path, class: button_classes.render(style: :secondary))
+      = form.submit(t('multipurpose.save'), class: "#{button_classes.render} float-right")

@@ -1,0 +1,8 @@
+
+- if resource&.errors&.any?
+  #error_explanation.text-red-800.px-4.py-3.bg-red-100.rounded-md.mb-5
+    h2.font-bold.text-lg.mb-2 = t('pluralization.errors', count: resource.errors.count)
+
+    ul.list-disc.list-inside.text-sm
+      - resource.errors.full_messages.each do |message|
+        li = message

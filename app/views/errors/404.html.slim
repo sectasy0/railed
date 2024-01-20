@@ -1,0 +1,16 @@
+section.bg-white.dark:bg-gray-900
+  .container.flex.items-center.px-6.mx-auto.h-500
+    .flex.flex-col.items-center.max-w-md.mx-auto.text-center
+      p.text-sm.font-medium.text-red-500
+				| 404 error
+      h1.mt-3.text-2xl.font-semibold.text-gray-800.dark:text-white.md:text-3xl
+        | We lost this page
+      p.mt-4.text-gray-500.dark:text-gray-400
+        | We searched high and low, but couldn’t find what you’re looking for. Let’s find a better place for you to go.
+      .flex.items-center.w-full.mt-6.gap-x-3.shrink-0.sm:w-auto
+        button.flex.items-center.justify-center.w-1/2.px-5.py-2.text-sm.text-gray-700.transition-colors.duration-200.bg-white.border.rounded-lg.gap-x-2.sm:w-auto.dark:hover:bg-gray-800.dark:bg-gray-900.hover:bg-gray-100.dark:text-gray-200.dark:border-gray-700
+          = icon('fa-solid', 'chevron-left')
+          span
+            | Go back
+        button.w-1/2.px-5.py-2.text-sm.tracking-wide.text-white.transition-colors.duration-200.bg-red-500.rounded-lg.shrink-0.sm:w-auto.hover:bg-opacity-75
+          |  Take me home

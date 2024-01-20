@@ -1,0 +1,7 @@
+{
+	"conventionalCommits.scopes": [
+		"feature",
+		"models",
+		"request"
+	]
+}

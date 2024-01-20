@@ -1,0 +1,27 @@
+.relative.ml-1[data-controller='toggle' data-toggle-click-outside='add']
+  div
+    button#user-menu-button.flex.max-w-xs.items-center.text-sm.p-1.pl-3.pr-3.rounded-md.focus:outline-none.hover:bg-gray-700.focus:bg-gray-700.focus:ring-gray-800[data-action='toggle#toggle' type='button' aria-expanded='false' aria-haspopup='true']
+      span.sr-only
+        | Open user menu
+      span.mr-3.text-gray-400.text-sm
+        = t('views.hi')
+        | &nbsp;
+        = current_account.name
+
+      - if current_account.avatar.present?
+        = image_tag(current_account.avatar_url, class: 'avatar rounded-full')
+      - else
+        = current_account.letters_svg
+
+  .hidden.origin-top-right.absolute.top-full.right-0.mt-2.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-100.z-30[data-toggle-target='toggleable' data-css-class='hidden' role='menu' aria-orientation='vertical' aria-labelledby='user-menu-button' tabindex='-1']
+    .px-4.py-3
+      p.text-sm = t('menu.dropdown.signed_in_as')
+      p.text-sm.font-medium.text-gray-900.truncate = current_account.email
+
+    .py-1[role="menu" aria-orientation="vertical" aria-labelledby="options-menu"]
+      - unless current_account.oauth?
+        = link_to(t('menu.dropdown.change_password'), accounts_passwords_edit_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100', role: 'menuitem', tabindex: '-1')
+      = link_to(t('menu.dropdown.report_bug'), contact_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100', role: 'menuitem', tabindex: '-1')
+
+    .py-1[role="menu" aria-orientation="vertical" aria-labelledby="options-menu"]
+      = button_to(t('menu.dropdown.log_out'), destroy_account_session_path, method: :delete, class: 'block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100', role: 'menuitem', tabindex: '-1')

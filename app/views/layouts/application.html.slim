@@ -1,0 +1,15 @@
+doctype html
+html
+  head = render(partial: 'layouts/partials/head')
+
+  body.text-gray-600.min-h-screen
+    = render('shared/flash_alerts')
+
+    = render('layouts/partials/nav')
+
+    - unless controller_name.eql?('landing')
+      main.max-w-7xl.mx-auto.mt-10.px-6.lg:px-8.main-full = yield
+    - else
+      = yield
+
+    = render(partial: 'layouts/partials/footer')

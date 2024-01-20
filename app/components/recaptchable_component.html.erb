@@ -1,0 +1,8 @@
+<% nonce = content_security_policy_nonce %>
+
+<% if v2_fallback %>
+  <%- site_key = Rails.application.credentials[:recaptcha_site_key_v2] %>
+  <%= recaptcha_tags(site_key:, noscript: false, nonce:) %>
+<% else %>
+  <%= recaptcha_v3(action: target, nonce:) %>
+<% end %>

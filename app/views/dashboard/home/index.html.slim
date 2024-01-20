@@ -1,0 +1,17 @@
+- set_meta_tags(title: t('views.dashboard.home.title'))
+
+= breadcrumb
+
+.flex.items-center.flex-wrap
+  .flex-grow
+    h1.font-semibold.text-lg.text-gray-900
+      span.break-all = t('views.dashboard.home.server_list')
+  .flex.justify-end.flex-auto
+    .mb-4.mt-4 = link_to(icon('fa-solid', 'plus', class: 'mr-1') + t('views.dashboard.home.add_server'), new_dashboard_server_path, class: "#{button_classes.render(style: :success)} text-xs")
+
+hr.border-gray-200.sm:mx-auto.dark:border-gray-700
+
+
+.grid.grid-cols-1.gap-3.sm:grid-cols-2.lg:grid-cols-3.mt-5.md:gap-6.mb-5
+  / - current_account.website.servers.each do |server|
+  /   = render(ServerCardComponent.new(server:))

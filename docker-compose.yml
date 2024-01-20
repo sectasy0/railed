@@ -1,0 +1,83 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: app
+    depends_on:
+      - database
+      - redis
+    ports:
+      - "7777:7777"
+    links:
+      - database
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7777/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - logs:/home/app/build/log
+      - public:/home/app/build/public
+    environment:
+      RAILS_SERVE_STATIC_FILES: 1
+      RAILS_ENV: production
+
+  database:
+    image: postgres:16-alpine3.18
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/16/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DATABASE_USER}", "-d", "${DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  redis:
+    image: redis:7.2.3-alpine3.18
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+      - database
+      - redis
+    env_file: .env
+    environment:
+      RAILS_ENV: production
+    entrypoint: ./entrypoints/sidekiq-entrypoint.sh
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: nginx
+    depends_on:
+      - app
+      - database
+      - redis
+      - sidekiq
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - public:/home/app/public
+    environment:
+      RAILS_ENV: production
+
+volumes:
+  gem_cache:
+  database-data:
+  public:
+  logs:

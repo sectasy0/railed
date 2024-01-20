@@ -1,0 +1,14 @@
+- title(t('forms.passwords_reset.title'))
+
+.max-w-md.mx-auto
+  .mb-8 = tag.h1(t('forms.accounts.forgot_password'), class: page_title_classes.render)
+
+  = form_with(url: accounts_passwords_reset_password_reset_path, scope: :account) do |form|
+    .mb-4
+      = form.label :email, class: label_classes.render
+      .mt-1
+        = form.email_field :email, autofocus: true, required: true, class: input_classes.render, value: params.dig(:account, :email)
+
+    .mb-4 = render(RecaptchableComponent.new(target: "#{controller_name}/create", v2_fallback: @show_checkbox_recaptcha))
+
+    div = form.submit(t('forms.passwords_reset.submit'), class: button_classes.render(fullwidth: true))

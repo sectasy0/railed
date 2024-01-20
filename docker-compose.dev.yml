@@ -1,0 +1,84 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    depends_on:
+      - database
+      - redis
+    ports:
+      - "7777:7777"
+    links:
+      - database
+    volumes:
+      - .:/home/app/build
+    env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      DATABASE_NAME: railed_development
+      BROWSERLESS_URL: http://selenium:4444
+
+  database:
+    image: postgres:16-alpine3.18
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/16/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  redis:
+    image: redis:7.2.3-alpine3.18
+
+  sidekiq:
+    user: root
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+      - database
+      - redis
+    volumes:
+      - .:/home/app/build
+    env_file: .env
+    environment:
+      RAILS_ENV: development
+    entrypoint: ./entrypoints/sidekiq-entrypoint.sh
+
+  tailwind-watch:
+    user: root
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+    volumes:
+      - .:/home/app/build
+      - ./node_modules:/home/app/build/node_modules
+    env_file: .env
+    environment:
+      RAILS_ENV: development
+    entrypoint: ./entrypoints/tailwind-entrypoint.sh
+
+  # for running tests in dockerized local environment
+  selenium:
+    image: selenium/standalone-chrome:119.0
+    ports:
+      - 4444:4444
+
+volumes:
+  gem_cache:
+  database-data:
+  node_modules:

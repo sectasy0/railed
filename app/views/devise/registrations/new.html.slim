@@ -1,0 +1,55 @@
+.max-w-md.mx-auto
+  .mb-8
+    = tag.h1(t('forms.accounts.sign_up'), class: page_title_classes.render)
+    p.mt-2.text-sm.text-gray-600
+      = t('forms.accounts.already_have')
+      = link_to(t('forms.accounts.sign_in'), new_account_session_path, class: 'font-medium text-red-600 hover:text-red-700 ml-1')
+
+  = form_with(url: account_registration_path, model: @account, scope: :account) do |form|
+    = render('shared/form_errors', resource: @account)
+
+    .mb-3
+      = form.label :name, t('forms.accounts.name'), class: label_classes.render
+      .mt-1
+        = form.text_field :name, autocomplete: 'name', class: input_classes.render, value: params.dig(:account, :name)
+
+    .mb-3
+      = form.label :email, t('forms.accounts.email'), class: label_classes.render
+      .mt-1
+        = form.email_field :email, autocomplete: 'email', class: input_classes.render, value: params.dig(:account, :email)
+
+    .mb-3
+      = form.label :password, t('forms.accounts.password'),  class: label_classes.render
+      .mt-1
+        = form.password_field :password, autocomplete: 'new-password', class: input_classes.render, value: params.dig(:account, :password)
+      = tag.span t('forms.accounts.password_length_hint', minimum: Devise.password_length.to_s.split('..')[0]), class: hint_classes.render
+
+    .mb-3
+      = form.label :password_confirmation, t('forms.accounts.password_confirmation'),  class: label_classes.render
+      .mt-1
+        = form.password_field :password_confirmation, autocomplete: 'new-password', class: input_classes.render, value: params.dig(:account, :password_confirmation)
+
+    .mb-4
+      = form.label :terms do
+        .flex.items-start
+          = form.check_box :terms, class: 'mt-0.5 mr-3 focus:ring-indigo-500 h-4 w-4 text-red-600 border-gray-300 rounded'
+          span.font-normal.text-gray-600.text-sm
+            = t('forms.accounts.terms_text')
+            = link_to(t('forms.accounts.terms'), '#', target: '_blank', class: 'underline text-gray-900 ml-1 mr-1')
+            = t('multipurpose.and')
+            = link_to(t('forms.accounts.privacy_policy'), '#', target: '_blank', class: 'underline text-gray-900 ml-1')
+
+    .mb-3 = render(RecaptchableComponent.new(target: "#{controller_name}/create", v2_fallback: @show_checkbox_recaptcha))
+
+    .form-actions
+      = form.submit(t('forms.accounts.sign_up'), class: button_classes.render(fullwidth: true))
+
+  .mt-6.relative
+    .absolute.inset-0.flex.items-center
+      .w-full.border-t.border-gray-300
+
+    .relative.flex.justify-center.text-sm
+      span.bg-white.px-2.text-gray-500 = t('multipurpose.or')
+
+  .mt-5.text-center
+    = link_to(icon('fa-brands', 'discord', class: 'mr-1') + t('services.oauth.discord'), nil, class: button_classes.render(fullwidth: true, style: :discord))

@@ -1,0 +1,4 @@
+development:
+  app_mail: no-reply@railed.pl
+test:
+  app_mail: no-reply@railed.pl

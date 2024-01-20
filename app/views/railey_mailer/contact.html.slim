@@ -1,0 +1,22 @@
+
+h1.text-2xl.font-semibold.mb-4 = t('mailers.railey_mailer.contact.title', email: @form_data[:email])
+
+p.text-gray-700
+  | You have received a new message from the contact form:
+
+.bg-gray-200.p-4.rounded-lg.mt-4
+  p.text-gray-700
+    strong
+      | Email:&nbsp;
+    = @form_data[:email]
+
+  p.text-gray-700
+    strong
+      | Subject:&nbsp;
+    = @form_data[:subject]
+
+  p.text-gray-700
+    strong
+      | Message:&nbsp;
+    = @form_data[:message]
+br

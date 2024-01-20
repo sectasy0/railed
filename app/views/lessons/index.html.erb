@@ -1,0 +1,29 @@
+<div>
+  <h1 class="font-semibold text-3xl text-gray-900">Lessons</h1>
+
+  <div class="grid grid-cols-4 gap-8 gap-y-12 my-12">
+    <%= render(VideoCardComponent.new(
+      title: "Hiking getaway in the hills",
+      thumbnail: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=2000&q=60"
+    )) %>
+
+    <%= render(VideoCardComponent.new(
+      title: "A pleasant stroll through the woods",
+      thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60"
+    )) %>
+
+    <%= render(VideoCardComponent.new(
+      title: "Walking the beach at sunset",
+      thumbnail: "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60"
+    )) %>
+
+    <%= render(VideoCardComponent.new(
+      title: "Getting up early for sunrise",
+      thumbnail: "https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG5hdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=2000&q=60"
+    )) %>
+
+    <%= render(VideoCardComponent.new(
+      title: "Draft video"
+    )) %>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+main.max-w-7xl.mx-auto.mt-10.px-6.lg:px-8.main-full
+  section.bg-white.dark:bg-gray-900.mb-20.md:mb-12
+    .py-0.lg:py-16.px-0.lg:px-4.mx-auto.max-w-screen-md.pt-0
+
+      h2.mb-4.text-4xl.tracking-tight.font-extrabold.text-center.text-gray-900.dark:text-white
+        = t('forms.contact.title')
+      p.mb-4.font-light.text-center.text-gray-500.dark:text-gray-400.sm:text-xl
+        = t('forms.contact.desc')
+
+      = render('shared/flash_alerts')
+
+      = form_with(url: contact_send_path, scope: :contact) do |form|
+        .mb-3
+          = form.label :email, t('forms.contact.email'), class: label_classes.render
+          .mt-1
+            = form.email_field :email, autofocus: true, required: true, autocomplete: 'email', class: "#{input_classes.render} bg-gray-50", placeholder: t('forms.contact.email_placeholder'), value: params.dig(:contact, :email)
+
+        .mb-3
+          = form.label :subject, t('forms.contact.subject'), class: label_classes.render
+          .mt-1
+            = form.text_field :subject, required: true, autocomplete: 'subject', class: "#{input_classes.render} bg-gray-50", placeholder: t('forms.contact.subject_placeholder'), value: params.dig(:contact, :subject)
+
+        .mb-3
+          = form.label :message, t('forms.contact.message'), class: label_classes.render
+          .mt-1
+            = form.text_area :message, required: true, autocomplete: 'message', class: "#{input_classes.render} bg-gray-50", rows: 6, placeholder: t('forms.contact.message_placeholder'), value: params.dig(:contact, :message)
+
+        = render(RecaptchableComponent.new(target: "#{controller_name}/send_message", v2_fallback: @show_checkbox_recaptcha))
+
+        .form-actions
+          .float-right = form.submit(t('forms.contact.submit'), class: button_classes.render)

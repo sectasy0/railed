@@ -1,0 +1,64 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+name: "Ruby on Rails CI"
+on:
+  push:
+  pull_request:
+
+# blame github for not supporting yaml anchors
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      DATABASE_NAME: railey_test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build Docker image
+        run: docker-compose build
+      - name: Set entrypoints permission
+        # dunno why gh actions can't preserve permissions
+        run: |
+          chmod +x ./entrypoints/docker-entrypoint.sh
+          chmod +x ./entrypoints/sidekiq-entrypoint.sh
+      - name: Start containers
+        run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} docker-compose --f docker-compose.test.yml up -d
+      - name: Assets precompile
+        run: |
+          docker-compose exec -T app yarn install
+          docker-compose exec -T app chmod +x bin/rails
+          docker-compose exec -T app bin/rails assets:precompile
+      - name: Set up database schema
+        run: |
+          docker-compose exec -T app bin/rails db:create
+          docker-compose exec -T app bin/rails db:schema:load
+      - name: Run tests
+        run: |
+          docker-compose exec -T app chmod +x bin/rspec
+          docker-compose exec -T app bin/rspec
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build Docker image
+        run: docker-compose build
+      - name: Set entrypoints permission
+        # dunno why gh actions can't preserve permissions
+        run: |
+          chmod +x ./entrypoints/docker-entrypoint.sh
+          chmod +x ./entrypoints/sidekiq-entrypoint.sh
+      - name: Start containers
+        run: RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} docker-compose --f docker-compose.test.yml up -d
+      - name: Security audit dependencies
+        run: docker-compose exec -T app bundle exec bundler-audit --update
+      - name: Security audit application code
+        run: docker-compose exec -T app bundle exec brakeman -q -w2
+      - name: Lint Ruby files
+        run: docker-compose exec -T app bundle exec rubocop --parallel

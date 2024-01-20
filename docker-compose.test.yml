@@ -1,0 +1,62 @@
+version: '3.4'
+
+# This docker-compose file is only used for running the tests from CI
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+      - redis
+    ports:
+      - "7777:7777"
+    links:
+      - database
+    env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      DATABASE_NAME: railed_test
+      BROWSERLESS_URL: http://selenium:4444
+
+  database:
+    image: postgres:16-alpine3.18
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/16/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  redis:
+    image: redis:7.2.3-alpine3.18
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+      - database
+      - redis
+    env_file: .env
+    environment:
+      RAILS_ENV: test
+    entrypoint: ./entrypoints/sidekiq-entrypoint.sh
+
+  # for tests only
+  selenium:
+    image: selenium/standalone-chrome:119.0
+    ports:
+      - 4444:4444
+
+volumes:
+  gem_cache:
+  database-data:

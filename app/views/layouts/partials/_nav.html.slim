@@ -1,0 +1,53 @@
+nav.bg-gray-800.border-gray-200
+	.flex.flex-wrap.items-center.justify-between.max-w-screen-xl.mx-auto.p-4
+		a.flex.items-center
+			= image_tag 'rapid-ruby-stamp-dark.svg', alt: 'Railed', class: 'h-10 w-auto'
+			span.self-center.text-2xl.font-semibold.whitespace-nowrap
+
+		.flex.items-center.md:order-2
+			div
+				.relative[data-controller='toggle' data-toggle-click-outside='add']
+					div
+						button#language-menu.flex.items-center.justify-between.rounded-md.p-2.w-10.h-10.pl-11px.text-gray-400.text-sm.hover:bg-gray-700.focus:bg-gray-700.focus:ring-gray-800[data-action='toggle#toggle' type='button' aria-expanded='false' aria-haspopup='true']
+							span.text-gray-400.text-sm = I18n.locale.upcase
+
+					.hidden.origin-top-right.absolute.w-auto.top-full.right-0.mt-2.w-56.rounded-md.shadow-lg.bg-white.ring-1.ring-black.ring-opacity-5.divide-y.divide-gray-100.z-30[data-toggle-target='toggleable' data-css-class='hidden' role='menu' aria-orientation='vertical' aria-labelledby='language-menu' tabindex='-1']
+						- I18n.available_locales.each do |locale|
+							- next if locale == I18n.locale
+							.py-1[role="menu" aria-orientation="vertical" aria-labelledby="language-menu"]
+								= link_to(t("locale.#{locale}"), change_locale_path(locale: locale, back: request.fullpath), class: 'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100')
+
+			.space-x-4.mr-2
+				- if account_signed_in?
+					= render(partial: 'layouts/partials/user_dropdown')
+				- elsif controller_name.eql?('landing')
+					= link_to(t('menu.client_panel'), new_account_session_path, class: 'inline-block rounded-md border border-transparent bg-rose-500 py-2 px-4 text-sm sm:text-base font-medium text-white hover:bg-opacity-75 focus:ring-4 focus:ring-rose-400 ml-2')
+
+			button#menu-toggle.inline-flex.items-center.p-2.w-10.h-10.justify-center.text-sm.text-gray-500.rounded-md.md:hidden.focus:outline-none.focus:ring-2.focus:ring-gray-200.dark:text-gray-400.dark:hover:bg-gray-700.dark:focus:ring-gray-600[data-collapse-toggle="menu" type="button" aria-controls="menu" aria-expanded="false"]
+				span.sr-only
+					| Open main menu
+				svg.w-5.h-5[aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 17 14"]
+					path[stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"]
+
+		#menu.hidden.justify-between.w-full.md:flex.md:w-auto.md:order-1.md:ml-10.flex-auto
+			ul.flex.flex-col.mt-4.font-medium.md:flex-row.md:space-x-8.md:mt-0
+				- unless current_account
+					li = link_to(t('menu.home'), root_path, class: 'block py-2 pl-3 pr-4 text-gray-200 hover:text-white border-b border-gray-700 md:hover:bg-transparent md:border-0 md:p-0')
+					li
+						a.block.py-2.pl-3.pr-4.text-gray-200.hover:text-white.border-b.border-gray-700.md:hover:bg-transparent.md:border-0.md:p-0[href="#" aria-current="page"]
+							| News
+					li = link_to(t('menu.contact'), contact_path, class: 'block py-2 pl-3 pr-4 text-gray-200 hover:text-white border-b border-gray-700 md:hover:bg-transparent md:border-0 md:p-0')
+				- if current_account
+					li
+						button#admin-dropdown-button.flex.items-center.justify-between.w-full.py-2.pl-3.pr-4.font-medium.text-gray-200.border-b.border-gray-700.md:w-auto.md:hover:bg-transparent.md:border-0.md:hover:text-white.md:p-0.md:dark:hover:text-blue-500.dark:hover:bg-gray-700.md:dark:hover:bg-transparent.dark:border-gray-700[data-dropdown-toggle="admin-dropdown"]
+							| Admin
+							svg.w-2.5.h-2.5.ml-2.5[aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 10 6"]
+								path[stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"]
+
+						#admin-dropdown.absolute.z-10.hidden.w-auto.text-sm.bg-white.border.border-gray-100.rounded-md.shadow-md.dark:border-gray-700.md:grid-cols-3.dark:bg-gray-700
+							.p-4.pb-0.text-gray-200.md:pb-4
+								ul.space-y-4.mb-4.sm:mb-0[aria-labelledby="admin-dropdown-button"]
+									li
+										a.text-gray-500[href="#"] = icon('fa-solid', 'users', class: 'mr-1') + 'Users'
+									li
+										a.text-gray-500[href="#"] = icon('fa-solid', 'server', class: 'mr-1') + 'Servers'
